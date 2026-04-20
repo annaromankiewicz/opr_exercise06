@@ -17,6 +17,11 @@ public class ValueException extends Exception{
         super(msg);
     }
 
+    public ValueException(String msg, int status) {
+        super(msg);
+        this.whichValue = status;
+    }
+
     public int getWhichValue() {
         return whichValue;
     }
