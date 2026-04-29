@@ -1,16 +1,19 @@
 package sportsclub;
 
+import exceptions.NullValueException;
+import exceptions.ValueException;
+
 public class Section extends AbstractMember {
 
     BinarySearchTree<AbstractMember> section;
 
-    public Section(String name) {
+    public Section(String name) throws NullValueException {
         super(name);
         section = new BinarySearchTree<AbstractMember>();
     }
 
     @Override
-    double getIncome() {
+    public double getIncome() {
         AbstractMember[] sectionArray = section.toArray(new AbstractMember[section.size()], true); // I changed the signature of toArray in BST to avoid a typecast
         double sum = 0;
         for (AbstractMember member : sectionArray) {
@@ -20,7 +23,7 @@ public class Section extends AbstractMember {
     }
 
     @Override
-    double getCosts() {
+    public double getCosts() {
         AbstractMember[] sectionArray = section.toArray(new AbstractMember[section.size()], true);
         double sum = 0;
         for (AbstractMember abstractMember : sectionArray) {
@@ -64,15 +67,15 @@ public class Section extends AbstractMember {
     }
 
 
-    boolean addMember(AbstractMember m) {
+    public boolean addMember(AbstractMember m) throws ValueException {
         return section.insert(m);
     }
 
-    boolean removeMember(AbstractMember m) {
+    public boolean removeMember(AbstractMember m) throws ValueException {
         return section.remove(m);
     }
 
-    boolean isMember(AbstractMember m) {
+    public boolean isMember(AbstractMember m) throws ValueException {
         return section.find(m);
     }
 

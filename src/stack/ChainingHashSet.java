@@ -16,7 +16,7 @@ public class ChainingHashSet {
      */
     private int hash(int val) throws ValueException {
         // inner round bracket: result negative, second round bracket: result is positive
-        if(val < 0) throw new ValueException(val);
+        if (val < 0) throw new ValueException(val);
         return (val % array.length);
     }
 
@@ -29,7 +29,7 @@ public class ChainingHashSet {
         if (indexSize == 0) {
             throw new ValueException(indexSize);
         }
-            array = new RandomAccessDoubleLinkedList[indexSize]; // array stays null because it is not initialized
+        array = new RandomAccessDoubleLinkedList[indexSize]; // array stays null because it is not initialized
     }
 
     /**
@@ -37,19 +37,17 @@ public class ChainingHashSet {
      * array.length), if it did not exist in the table before. Returns true
      * if a new element was inserted, false if it already existed.
      */
-    public boolean insert(int val) throws Exception { // we use the absolute value of hashcode of negative values to not lose data
-        if (this.array != null) {
-            int hashcode = hash(val);                 // TODO: Do I need to implement the Exception here?
-            if (array[hashcode] == null) { // first element with the hashcode
-                array[hashcode] = new RandomAccessDoubleLinkedList();
-                array[hashcode].add(val);
-                return true;
-            } else if (!array[hashcode].contains(val)) {
-                array[hashcode].add(val);
-                return true;
-            }
-            return false;
-        } throw new NullPointerException("Array is null");
+    public boolean insert(int val) throws ValueException {
+        int hashcode = hash(val);
+        if (array[hashcode] == null) {
+            array[hashcode] = new RandomAccessDoubleLinkedList();
+            array[hashcode].add(val);
+            return true;
+        } else if (!array[hashcode].contains(val)) {
+            array[hashcode].add(val);
+            return true;
+        }
+        return false;
     }
 
 
@@ -57,12 +55,10 @@ public class ChainingHashSet {
      * Returns true if the given value is already stored in the
      * hashtable, false otherwise.
      */
-    public boolean contains(int val) throws Exception {
-        if (this.array != null) {
-            int hashcode = hash(val);
-            if (array[hashcode] == null) return false; // List of given val with hashcode is empty
-            return (array[hashcode].contains(val));
-        } throw new NullPointerException("Array is null");
+    public boolean contains(int val) throws ValueException {
+        int hashcode = hash(val);
+        if (array[hashcode] == null) return false; // List of given val with hashcode is empty
+        return (array[hashcode].contains(val));
     }
 
 
@@ -71,25 +67,22 @@ public class ChainingHashSet {
      * Returns true if an element was removed, false if no such
      * element existed.
      */
-    public boolean remove(int val) throws Exception {
-        if (this.array != null) {
-            if (this.contains(val)) {
-                int hashcode = hash(val);
-                array[hashcode].remove((Integer) val); // remove(Object o) -> casting necessary to call function with Integer
-                return true;
-            }
-            return false;
-        } throw new NullPointerException("Array is null");
+    public boolean remove(int val) throws ValueException {
+        if (this.contains(val)) {
+            int hashcode = hash(val);
+            array[hashcode].remove((Integer) val); // remove(Object o) -> casting necessary to call function with Integer
+            return true;
+        }
+        return false;
     }
 
     /**
      * Counts the amount of values, which are stored in the same
      * overflow list
      */
-    public int getOverflowCount(int hashVal) throws Exception {
-        if (this.array == null) throw new NullPointerException("Array is null");
+    public int getOverflowCount(int hashVal) throws ValueException {
         if (hashVal < 0 || hashVal >= array.length) { // invalid input for hashVal
-           throw new ValueException(hashVal);
+            throw new ValueException(hashVal);
         }
         if (array[hashVal] == null) return 0; // Overflowlist is not initialized
         return array[hashVal].size();
@@ -100,14 +93,12 @@ public class ChainingHashSet {
      * amount of elements in each overflow list.
      */
     public int elements() {
-        if (this.array != null) {
-            int sum = 0;
-            for (int i = 0; i < array.length; i++) {
-                if (array[i] != null) {
-                    sum += array[i].size();
-                }
+        int sum = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != null) {
+                sum += array[i].size();
             }
-            return sum;
-        } throw new NullPointerException("Array is null");
+        }
+        return sum;
     }
 }

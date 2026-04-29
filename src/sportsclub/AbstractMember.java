@@ -1,11 +1,15 @@
 package sportsclub;
 
+import exceptions.NullValueException;
+import exceptions.ValueException;
+
 public abstract class AbstractMember implements Comparable<AbstractMember> {
 
     /** In jedem Verein muss der Name eindeutig sein */
     protected String name;
 
-    public AbstractMember(String name) {
+    public AbstractMember(String name) throws NullValueException {
+        if (name == null) throw new NullValueException();
         this.name = name;
     }
 
@@ -13,13 +17,13 @@ public abstract class AbstractMember implements Comparable<AbstractMember> {
     /**
      * berechnet die gesamten Einnahmen, die der Verein durch dieses
      * Mitglied pro Jahr erzielt. */
-    abstract double getIncome();
+    abstract public double getIncome();
 
     /**
      * berechnet die gesamten Ausgaben, die dieses Mitglied pro Jahr
      * verursacht.
      */
-    abstract double getCosts();
+    abstract public double getCosts();
 
     /**
      * berechnet den finanziellen Überschuss, den dieses Mitglied dem

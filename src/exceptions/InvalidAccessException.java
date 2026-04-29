@@ -18,4 +18,8 @@ public class InvalidAccessException extends Exception {
         whichValue = 0;
     }
 
+    public int getWhichValue() {
+        return whichValue;
+    }
+
 }

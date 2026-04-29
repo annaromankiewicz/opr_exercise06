@@ -23,12 +23,12 @@ public class ChairMember extends AbstractMember {
     }
 
     @Override
-    double getIncome() {
+    public double getIncome() {
         return competenceValue * 100;
     }
 
     @Override
-    double getCosts() {
+    public double getCosts() {
         return getIncome() * 0.2;
     }
 

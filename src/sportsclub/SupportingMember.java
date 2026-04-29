@@ -1,8 +1,10 @@
 package sportsclub;
 
+import exceptions.ValueException;
+
 public class SupportingMember extends AbstractMember {
 
-    public SupportingMember(String name) {
+    public SupportingMember(String name) throws ValueException {
         super(name);
     }
 
@@ -11,12 +13,12 @@ public class SupportingMember extends AbstractMember {
 //    €15,- pro Jahr.
 
     @Override
-    double getIncome() {
+    public double getIncome() {
         return 100;
     }
 
     @Override
-    double getCosts() {
+    public double getCosts() {
         return 15;
     }
 

@@ -25,14 +25,14 @@ abstract public class ActiveMember extends AbstractMember {
     }
 
     @Override
-    double getIncome() {
+    public double getIncome() {
         return 12*getMonthlyIncome();  // *12 is in all subclasses the same, makes it easier to calculate income for each quarter etc.
     }
 
     abstract protected double getMonthlyIncome();           // abstract method implemented in each subclass
 
     @Override
-    double getCosts() {
+    public double getCosts() {
         return 12 * getMonthlyCosts();
     }
 

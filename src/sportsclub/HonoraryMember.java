@@ -1,18 +1,21 @@
 package sportsclub;
 
+import exceptions.NullValueException;
+import exceptions.ValueException;
+
 public class HonoraryMember extends AbstractMember {
 
-    public HonoraryMember(String name) {
+    public HonoraryMember(String name) throws NullValueException {
         super(name);
     }
 
     @Override
-    double getIncome() {
+    public double getIncome() {
         return 0;
     }
 
     @Override
-    double getCosts() {
+    public double getCosts() {
         return 20;
     }
 
