@@ -1,5 +1,6 @@
 package stack;
 
+import exceptions.InvalidAccessException;
 import mc.opr.dll.MyDoubleLinkedList;
 
 public class ListQueue extends MyDoubleLinkedList {
@@ -36,14 +37,16 @@ public class ListQueue extends MyDoubleLinkedList {
     /**
      * Dequeues the element at the front of the queue.
      */
-    public int dequeue() {
+    public int dequeue() throws InvalidAccessException {
+        if (this.elements()==0) throw new InvalidAccessException("List is empty");
         return super.popFront();
     }
 
     /**
      * Returns the front element of the queue without removing it.
      */
-    public int peek() {
+    public int peek() throws InvalidAccessException {
+        if (this.elements()==0) throw new InvalidAccessException("List is empty");
         return super.peekFront();
     }
 
