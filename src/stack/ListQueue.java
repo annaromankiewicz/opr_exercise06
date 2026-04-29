@@ -1,6 +1,5 @@
 package stack;
 
-import exceptions.NullValueException;
 import mc.opr.dll.MyDoubleLinkedList;
 
 public class ListQueue extends MyDoubleLinkedList {

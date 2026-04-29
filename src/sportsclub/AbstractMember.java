@@ -1,6 +1,5 @@
 package sportsclub;
 
-import exceptions.NullValueException;
 import exceptions.ValueException;
 
 public abstract class AbstractMember implements Comparable<AbstractMember> {
@@ -8,8 +7,8 @@ public abstract class AbstractMember implements Comparable<AbstractMember> {
     /** In jedem Verein muss der Name eindeutig sein */
     protected String name;
 
-    public AbstractMember(String name) throws NullValueException {
-        if (name == null) throw new NullValueException();
+    public AbstractMember(String name) throws ValueException {
+        if (name == null) throw new ValueException("Name is null");
         this.name = name;
     }
 

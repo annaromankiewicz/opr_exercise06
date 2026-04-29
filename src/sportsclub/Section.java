@@ -1,13 +1,12 @@
 package sportsclub;
 
-import exceptions.NullValueException;
 import exceptions.ValueException;
 
 public class Section extends AbstractMember {
 
     BinarySearchTree<AbstractMember> section;
 
-    public Section(String name) throws NullValueException {
+    public Section(String name) throws ValueException {
         super(name);
         section = new BinarySearchTree<AbstractMember>();
     }

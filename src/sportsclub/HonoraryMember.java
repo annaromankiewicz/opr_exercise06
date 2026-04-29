@@ -1,11 +1,10 @@
 package sportsclub;
 
-import exceptions.NullValueException;
 import exceptions.ValueException;
 
 public class HonoraryMember extends AbstractMember {
 
-    public HonoraryMember(String name) throws NullValueException {
+    public HonoraryMember(String name) throws ValueException {
         super(name);
     }
 

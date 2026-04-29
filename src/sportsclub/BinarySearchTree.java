@@ -1,6 +1,5 @@
 package sportsclub;
 
-import exceptions.NullValueException;
 import exceptions.ValueException;
 
 public class BinarySearchTree<T extends Comparable<T>> {
@@ -65,7 +64,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
      if the element could be found, false otherwise. */
 
     public boolean find(T key) throws ValueException {
-        if (key == null) throw new NullValueException();
+        if (key == null) throw new ValueException("Key is null");
         BinaryTreeNode p = getBinaryTreeNode(key);
         if (p == null) return false; // tree is empty
         else return p.data.compareTo(key) == 0;
@@ -79,8 +78,8 @@ public class BinarySearchTree<T extends Comparable<T>> {
      * the BinaryTreeNode with requested key should be found
      */
 
-    private BinaryTreeNode getBinaryTreeNode(T key) throws NullValueException{
-        if (key == null) throw new NullValueException();
+    private BinaryTreeNode getBinaryTreeNode(T key) throws ValueException{
+        if (key == null) throw new ValueException("Key is null");
         BinaryTreeNode prev = null;
         BinaryTreeNode current = root;
         if (root == null) return null;
@@ -108,9 +107,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
      * Returns true if node is right child of parent and false if child is on the left
      * if parent is null -> throws exception
      */
-    private boolean isRight(BinaryTreeNode parent, T elem) throws NullValueException {
-        if (parent == null) throw new NullValueException();
-        if (elem == null) throw new NullValueException();;
+    private boolean isRight(BinaryTreeNode parent, T elem) throws ValueException {
+        if (parent == null) throw new ValueException("Parent is null");
+        if (elem == null) throw new ValueException("Element is null");
 
         return elem.compareTo(parent.data) > 0;
 
@@ -123,8 +122,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
      */
     public boolean remove(T key) throws ValueException { // left or right from parent check just one time
 
-        if (key == null) throw new NullValueException();;
-        if (root == null) throw new NullPointerException("Root is null");
+        if (key == null) throw new ValueException("Key is null");
 
         BinaryTreeNode current = getBinaryTreeNode(key); // node we want to remove
         BinaryTreeNode parent = getParentNode(key);     // parent of node we want to remove
@@ -204,8 +202,8 @@ public class BinarySearchTree<T extends Comparable<T>> {
      * Returns the parent node of element with the given key
      */
 
-    private BinaryTreeNode getParentNode(T key) throws NullValueException{
-        if (key == null) throw new NullValueException();
+    private BinaryTreeNode getParentNode(T key) throws ValueException{
+        if (key == null) throw new ValueException("Key is null");
         BinaryTreeNode prev = null;
         BinaryTreeNode current = root;
         if (root == null) return null;
@@ -231,7 +229,8 @@ public class BinarySearchTree<T extends Comparable<T>> {
      * Returns the parent element of the given key. Throws exception if
      * parent is null
      */
-    public T getParent(T key) throws NullValueException {
+    public T getParent(T key) throws ValueException {
+        if (key == null) throw new ValueException("Key is null");
         BinaryTreeNode parent = getParentNode(key);
         if (parent == null) return null;
         return parent.data;
